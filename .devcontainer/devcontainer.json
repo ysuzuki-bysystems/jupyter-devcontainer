@@ -3,17 +3,25 @@
   "$schema": "https://raw.githubusercontent.com/devcontainers/spec/refs/heads/main/schemas/devContainer.schema.json",
 	"name": "Jupyter DevContainer",
   "image": "mcr.microsoft.com/devcontainers/python:3-bookworm",
-  "features": {
-    // "ghcr.io/devcontainers/features/conda:1": {},
-    "ghcr.io/va-h/devcontainers-features/uv:1": {
-      "shellautocompletion": true
-    },
-    "ghcr.io/devcontainers/features/node:1": {},
-    "ghcr.io/devcontainers-extra/features/apt-packages:1": {
-      "packages": "fonts-noto-cjk"
+  "containerEnv": {
+    "UV_LINK_MODE": "copy"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-toolsai.jupyter"
+      ]
     }
   },
-  "postCreateCommand": {
-    // "jupyter": ["conda", "install", "--yes", "anaconda::jupyter", "anaconda::pandas", "conda-forge::matplotlib"]
+  "features": {
+      "ghcr.io/va-h/devcontainers-features/uv:1": {
+        "shellautocompletion": true
+      },
+      "ghcr.io/devcontainers-extra/features/apt-packages:1": {
+        "packages": "fonts-noto-cjk"
+      }
+  },
+  "onCreateCommand": {
+    "uv-sync": ["uv", "sync"]
   }
 }
